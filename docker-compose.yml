@@ -10,7 +10,7 @@ services:
       - ./FastAPI:/app/FastAPI
 
     environment:
-      SECRET_KEY: "your_super_secret_key_from_env_file_or_generate_new"
+      SECRET_KEY: "your_super_secret_key_here_please_change_this_to_a_random_string_in_production"
       ALGORITHM: "HS256"
     depends_on:
       - backend_db
