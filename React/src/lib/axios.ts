@@ -1,11 +1,10 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: import.meta.env.REACT_APP_API_URL || "http://localhost:8000",
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:8000",
   withCredentials: true,
 });
 
-console.log(import.meta.env.REACT_APP_API_URL);
 let authToken: string | null = null;
 
 export function setAuthToken(token: string) {
