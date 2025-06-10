@@ -2,6 +2,16 @@
 import { useState } from "react";
 import { registerUser } from "./api";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -21,47 +31,55 @@ export default function Register() {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-10">
-      <h1 className="text-xl font-bold mb-4">Register</h1>
-      {error && <p className="text-red-500">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Username"
-          className="w-full p-2 border rounded"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 border rounded"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 border rounded"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p className="">
-          <span>Already have an account?</span>
+    <Card className="flex justify-center mx-auto w-[400px] mt-10">
+      <CardHeader>
+        <CardTitle className="text-2xl">Create Account</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
+        {error && <p className="text-red-600">{error}</p>}
+        <div className="flex flex-col gap-3">
+          <Label htmlFor="username-create-account">Username</Label>
+          <Input
+            id="username-create-account"
+            type="username"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col gap-3">
+          <Label htmlFor="username-create-account">Email</Label>
+          <Input
+            id="email-create-account"
+            type="email"
+            placeholder="E-mail"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col gap-3">
+          <Label htmlFor="password-create-account">Password</Label>
+          <Input
+            id="password-create-account"
+            type="password"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+      </CardContent>
+      <CardFooter className="flex-col">
+        <p className="mb-4 text-start">
+          Already have an account?{" "}
           <Link
-            className="text-blue-800 hover:underline hover:text-purple-800 mx-1"
             to={"/login"}
+            className="text-blue-600 hover:underline hover:text-blue-800"
           >
             Login
-          </Link>
+          </Link>{" "}
+          now
         </p>
-        <button
-          type="submit"
-          className="w-full p-2 bg-green-600 text-white rounded"
-        >
-          Register
-        </button>
-      </form>
-    </div>
+        <Button onClick={handleSubmit} className="w-full">
+          Create account
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }

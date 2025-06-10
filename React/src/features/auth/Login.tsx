@@ -2,6 +2,16 @@
 import { useState } from "react";
 import { loginUser } from "./api";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -20,40 +30,46 @@ export default function Login() {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-10">
-      <h1 className="text-xl font-bold mb-4">Login</h1>
-      {error && <p className="text-red-500">{error}</p>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Username"
-          className="w-full p-2 border rounded"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 border rounded"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <p className="gap-2">
-          <span>Don't have an account yet?</span>
+    <Card className="flex justify-center mx-auto w-[400px] mt-10">
+      <CardHeader>
+        <CardTitle className="text-2xl">Log in</CardTitle>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-4">
+        {error && <p className="text-red-600">{error}</p>}
+        <div className="flex flex-col gap-3">
+          <Label htmlFor="username-login">Username</Label>
+          <Input
+            id="username-login"
+            type="username"
+            placeholder="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col gap-3">
+          <Label htmlFor="password-login">Password</Label>
+          <Input
+            id="password-login"
+            type="password"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+      </CardContent>
+      <CardFooter className="flex-col">
+        <p className="mb-4 text-start">
+          Don't have an account?{" "}
           <Link
-            className="text-blue-800 hover:underline hover:text-purple-800 mx-1"
             to={"/register"}
+            className="text-blue-600 hover:underline hover:text-blue-800"
           >
             Register
-          </Link>
+          </Link>{" "}
+          now
         </p>
-        <button
-          type="submit"
-          className="w-full p-2 bg-blue-600 text-white rounded"
-        >
-          Login
-        </button>
-      </form>
-    </div>
+        <Button onClick={handleSubmit} className="w-full">
+          Log In
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }
